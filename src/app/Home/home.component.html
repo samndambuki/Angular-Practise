@@ -1,19 +1,53 @@
-<h1>Home component</h1>
+<!-- <h1>Home component</h1>
 <p>{{message}}</p>
 <p>{{getMessage() }}</p>
 <p>{{inputText}}</p>
 <img src="" alt="">
-<button disabled>Button</button>
+<button disabled>Button</button> -->
 
 
 <!-- bind to disabled attribute
 use a button called showBtn -->
-<button [disabled]="!showBtn">Property Binding</button>
+<!-- <button [disabled]="!showBtn">Property Binding</button> -->
+<!-- 
+<button (click)="changeMessage(input.value)">Event Binding</button>
 
-<!-- <button (click)="changeMessage(input.value)">Event Binding</button> -->
-
-<input type="text" #input>
+<input type="text" #input> -->
 
 <!-- <input type="text" (input)="getInput($event)">
 
 <input type="text" [(ngModel)]="inputText"> -->
+
+
+<div [ngSwitch]="day">
+    <p *ngSwitchCase="1">Its Monday</p>
+    <p *ngSwitchCase="2">Its Tuesday</p>
+    <p *ngSwitchCase="3">Its Wednesday</p>
+    <p *ngSwitchCase="4">Its Thursday</p>
+    <p *ngSwitchCase="5">Its Friday</p>
+    <p *ngSwitchCase="6">Its Saturday</p>
+    <p *ngSwitchCase="7">Its Sunday</p>
+    <p *ngSwitchDefault>Default!</p>
+</div>
+
+<input type="text" #name>
+<input type="text" #age>
+<button (click)="addStudent(name.value,age.value)" >Submit</button>
+
+<p *ngIf="users.length">List of users</p>
+
+<div *ngIf="users.length; else noUsers" >
+    <!-- <p>Users Found</p> -->
+    <div *ngFor="let user of users; let i=index">
+        <h1>{{user.name}}</h1>
+
+        <p [ngStyle]="{backgroundColor:user.age>18? 'green':'red'}"
+            [ngClass]="{over18:user.age>18,under18:user.age<18}"
+            >{{user.age}}</p>
+        <button (click)="deleteUser(i)">Delete</button>
+    </div>
+</div>
+
+<ng-template #noUsers>
+    <p><i>No users</i></p>
+</ng-template>

@@ -7,4 +7,24 @@
 <app-contact></app-contact> -->
 
 
-<app-home></app-home>
+<app-add-student (add)="addStudent($event)"></app-add-student>
+<app-display-student [users]="users">
+    <p *ngIf="users.length">List of users</p>
+
+<div *ngIf="users.length; else noUsers" >
+    <!-- <p>Users Found</p> -->
+    <div *ngFor="let user of users; let i=index">
+        <h1>{{user.name}}</h1>
+
+        <p [ngStyle]="{backgroundColor:user.age>18? 'green':'red'}"
+            [ngClass]="{over18:user.age>18,under18:user.age<18}"
+            >{{user.age}}</p>
+        <button (click)="deleteUser(i)">Delete</button>
+    </div>
+</div>
+
+<ng-template #noUsers>
+    <p><i>No users</i></p>
+</ng-template>
+</app-display-student>
+
